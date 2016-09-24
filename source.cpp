@@ -44,16 +44,15 @@ private:
 			ITR(x, automaton[index]) {
 				Q.push(x->second);
 				int j = failure[index];
-				//PMA *r = t->next[0];
 				while (j != 0 && automaton[j].find(x->first) == automaton[j].end()) {
 					j = failure[j];
 				}
-				auto itr = automaton[j].find(x->first);
+				const auto itr = automaton[j].find(x->first);
 				failure[x->second] = itr == automaton[j].end() ? 0 : itr->second;
 
 				auto range = accept.equal_range(failure[x->second]);
-				for (auto itr = range.first; itr != range.second; itr++) {
-					accept.insert({ x->second,itr->second });
+				for (auto y = range.first; y != range.second; y++) {
+					accept.insert({ x->second,y->second });
 				}
 			}
 		}
