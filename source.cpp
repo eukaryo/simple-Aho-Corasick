@@ -1,34 +1,12 @@
 #include<iostream>
-#include<iomanip>
-#include<map>
 #include<unordered_map>
-#include<set>
-#include<unordered_set>
 #include<vector>
-#include<array>
 #include<string>
-#include<stack>
 #include<queue>
-#include<algorithm>
-#include<cassert>
-#include<functional>
-#include<random>
-#include<complex>
-//#include<boost/multiprecision/cpp_int.hpp>
-#define int int64_t
-#define REP(i, a, b) for (int64_t i = (int64_t)(a); i < (int64_t)(b); i++)
+#define REP(i, a, b) for (int i = (int)(a); i < (int)(b); i++)
 #define rep(i, a) REP(i, 0, a)
-#define EACH(i, a) for (auto i: a)
 #define ITR(x, a) for (auto x = a.begin(); x != a.end(); x++)
-#define ALL(a) (a.begin()), (a.end())
-#define HAS(a, x) (a.find(x) != a.end())
-#define Min(x) *min_element(ALL(x))
-#define Max(x) *max_element(ALL(x))
-#define Unique(L) (L.erase(unique(ALL(L)), L.end()))
 using namespace std;
-//typedef boost::multiprecision::cpp_int bigint;
-const double EPS = 1e-9;
-const double PI = acos(-1.0);
 
 class Aho_Corasick {
 private:
@@ -46,7 +24,7 @@ private:
 				const int c = pattern[i][j];
 				const auto itr = automaton[index].find(c);
 				if (itr == automaton[index].end()) {
-					automaton[index][c] = automaton.size();
+					automaton[index][c] = int(automaton.size());
 					automaton.resize(automaton.size() + 1);
 				}
 				index = automaton[index][c];
@@ -106,7 +84,7 @@ public:
 			index = itr == automaton[index].end() ? 0 : itr->second;
 			auto range = accept.equal_range(index);
 			for (auto itr = range.first; itr != range.second; itr++) {
-				ans[itr->second].push_back(i - pattern[itr->second].size() + 1);
+				ans[itr->second].push_back(i - int(pattern[itr->second].size()) + 1);
 			}
 		}
 		return ans;
