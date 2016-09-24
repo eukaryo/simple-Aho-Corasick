@@ -82,8 +82,8 @@ public:
 			const auto itr = automaton[index].find(c);
 			index = itr == automaton[index].end() ? 0 : itr->second;
 			auto range = accept.equal_range(index);
-			for (auto itr = range.first; itr != range.second; itr++) {
-				ans[itr->second].push_back(i - int(pattern[itr->second].size()) + 1);
+			for (auto x = range.first; x != range.second; x++) {
+				ans[x->second].push_back(i - int(pattern[x->second].size()) + 1);
 			}
 		}
 		return ans;
